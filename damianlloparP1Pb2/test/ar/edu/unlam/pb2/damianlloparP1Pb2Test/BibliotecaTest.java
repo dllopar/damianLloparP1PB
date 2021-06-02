@@ -78,5 +78,26 @@ public class BibliotecaTest {
 		
 	}
 	
+	@Test
+	public void testQueVerificaSiSeSacaDelListadoUnLibroPrestado() {
+		Biblioteca nacional = new Biblioteca("Biblioteca Nacional");
+		Libro laHistoriaArgentina = new Libro(1, " La historia Argentina", "Felipe Piña");
+		Libro geografiaMundial = new Libro(2, " Geografia Mundial", "Felix Luna");
+		Libro MatematicasPaenza = new Libro(3, " Matematicas, estas ahi?", "Adrian Paenza");
+		Estudiante martin = new Estudiante(2222, "Lopez", "Martin");
+		Estudiante carla = new Estudiante(2222, "Martinez", "Carla");
+		
+		nacional.ingresarLibroALaBiblioteca(MatematicasPaenza);
+		nacional.ingresarLibroALaBiblioteca(geografiaMundial);
+		nacional.ingresarLibroALaBiblioteca(laHistoriaArgentina);
+		
+		nacional.prestarUnLibro(1, martin, MatematicasPaenza);
+		
+		Integer esperado = 2;
+		Integer actual = nacional.cantidadDeLibros();
+		
+		assertEquals(esperado, actual);
+	}
+	
 	
 }

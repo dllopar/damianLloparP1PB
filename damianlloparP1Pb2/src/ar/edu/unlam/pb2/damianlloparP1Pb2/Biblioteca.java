@@ -22,6 +22,10 @@ public class Biblioteca {
 		return listado.add(libroNuevo);
 	}
 	
+	public Integer cantidadDeLibros() {
+		return listado.size();
+	}
+	
 	public Boolean pedirUnPrestamosDeLibro(Libro libroAPrestar) {
 		Boolean sePresto = false;
 		if(this.verificarSiEstaUnLibro(libroAPrestar)) {
@@ -37,6 +41,16 @@ public class Biblioteca {
 		Boolean buscado=false;
 		for (Libro libro : listado) {
 			if(libro.getNombre().equals(NombreABuscar.getNombre())) {
+				buscado=true;
+			}
+		}
+		return buscado;
+	}
+	
+	public Boolean verificarSiEstaUnLibroPrestado(Libro NombreABuscar) {
+		Boolean buscado=false;
+		for (Prestamo prestado : listadoPrestado) {
+			if(prestado.getLibroPrestado().getNombre().equals(NombreABuscar.getNombre())) {
 				buscado=true;
 			}
 		}
@@ -62,6 +76,31 @@ public class Biblioteca {
 			sePresto=true;
 		}
 		return sePresto;
+		
+	}
+	
+	public Boolean devolverUnLibro(Libro libroDevuelto) {
+		Boolean devuelto = false;
+		
+		if(this.verificarSiEstaUnLibroPrestado(libroDevuelto)) {
+			listado.add(libroDevuelto);
+			devuelto = true;
+		}
+		
+		return devuelto;
+		
+	}
+	
+	public Boolean eliminarPrestamoDeLaLista(Prestamo prestado) {
+		Boolean eliminado = false;
+		for (Prestamo prestado2 : listadoPrestado) {
+			if(prestado2.getLibroPrestado().getNombre().equals(prestado.getLibroPrestado().getNombre())) {
+				listadoPrestado.remove(prestado);
+				eliminado=true;
+			}
+		}
+		
+		return eliminado;
 		
 	}
 
