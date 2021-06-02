@@ -57,9 +57,11 @@ public class Biblioteca {
 	public Boolean prestarUnLibro(Integer id, Estudiante estudiante, Libro libroPrestado) {
 		Boolean sePresto=false;
 		if(this.verificarSiEstaUnLibro(libroPrestado)&&this.verificarCantidadDeLibrosPedidosPorUnEstudiante(estudiante)<=2) {
-			
+			listadoPrestado.add(new Prestamo(id, estudiante, libroPrestado));
+			listado.remove(libroPrestado);
+			sePresto=true;
 		}
-		return null;
+		return sePresto;
 		
 	}
 
